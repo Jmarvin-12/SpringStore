@@ -1,0 +1,1 @@
+INSERT INTO clientes (`nombre`,`apellido`,`email`,`create_at`) VALUES ('Marvin','Henriquez','josehenriquez.niu@gmail.com');
