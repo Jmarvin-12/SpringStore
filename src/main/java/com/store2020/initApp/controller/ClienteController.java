@@ -15,7 +15,7 @@ public class ClienteController {
 	@Autowired
 	private IClienteDao clienteDao;
 	
-	@GetMapping("/getAllClients")
+	@GetMapping("/ClientList")
 	public String getAllClients(Model model) {
 		
 		model.addAttribute("title", "Listado de clientes");

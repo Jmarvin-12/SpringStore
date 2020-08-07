@@ -1,1 +1,1 @@
-INSERT INTO clientes (`nombre`,`apellido`,`email`,`create_at`) VALUES ('Marvin','Henriquez','josehenriquez.niu@gmail.com');
+INSERT INTO clientes (`id`,`nombre`,`apellido`,`email`,`create_at`) VALUES (1,'Marvin','Henriquez','josehenriquez.niu@gmail.com', now());
