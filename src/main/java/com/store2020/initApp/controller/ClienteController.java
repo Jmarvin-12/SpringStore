@@ -2,9 +2,13 @@ package com.store2020.initApp.controller;
 
 import java.util.Map;
 
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,13 +34,19 @@ public class ClienteController {
 	
 	@GetMapping("/clientForm")
 	public String createClient(Map<String, Object> model, Cliente cliente) {
-		model.put("client", cliente= new Cliente());
-		model.put("formTitle", "Formulario para agregar nuevo cliente");
+		model.put("cliente", cliente= new Cliente());
+		model.put("formTitle", "Formulario de clientes");
 		return "clientForm";
 	}
 	
 	@PostMapping("/saveClient")
-	public String saveClient(Cliente cliente) {
+	public String saveClient(@Valid  Cliente cliente, BindingResult result, Model model) {
+		
+		if(result.hasErrors()) {
+			model.addAttribute("formTitle", "Formulario de clientes");
+			return "clientForm";
+		}
+		
 		clienteDao.save(cliente);
 		return "redirect:ClientList";
 	}
