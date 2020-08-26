@@ -30,8 +30,9 @@
 
 	<div class="container">
 
-		<form th:action="@{saveClient}" th:object="${cliente}" method="post" >
+		<form th:action="@{/saveClient}" th:object="${cliente}" method="post" >
 
+			
 			<div class="form-group row">
 			<label class="col-sm-3 col-form-label">Nombre</label>
 				<div class="col-sm-6 ">
@@ -66,7 +67,6 @@
 					<input type="submit" value="Agregar" class="btn btn-primary" />
 				</div>
 			</div>
-			<input type="hidden" th:field="*{id}" />
 			
 		</form>
 		</div>
