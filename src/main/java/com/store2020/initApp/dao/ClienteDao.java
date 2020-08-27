@@ -2,10 +2,9 @@ package com.store2020.initApp.dao;
 
 import java.util.List;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Repository;
 
 import com.store2020.initApp.model.Cliente;
@@ -17,7 +16,6 @@ public class ClienteDao implements IClienteDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	@Transactional()
 	@Override
 	public List<Cliente> findAllClients() {
 		
@@ -25,7 +23,6 @@ public class ClienteDao implements IClienteDao {
 	}
 
 	@Override
-	@Transactional
 	public void save(Cliente cliente) {
 		
 		if(cliente.getId() !=null && cliente.getId()>0){
@@ -37,9 +34,13 @@ public class ClienteDao implements IClienteDao {
 	}
 
 	@Override
-	@Transactional
 	public Cliente findOne(Long id) {
 		return em.find(Cliente.class, id);
+	}
+
+	@Override
+	public void deleteClient(Long id) {
+		em.remove(findOne(id));
 	}
 
 }

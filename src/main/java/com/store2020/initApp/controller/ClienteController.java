@@ -3,6 +3,7 @@ package com.store2020.initApp.controller;
 import java.util.Map;
 
 
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
-import com.store2020.initApp.dao.IClienteDao;
 import com.store2020.initApp.model.Cliente;
+import com.store2020.initApp.service.IClienteService;
 
 @Controller
 @RequestMapping
@@ -25,13 +25,13 @@ import com.store2020.initApp.model.Cliente;
 public class ClienteController {
 
 	@Autowired
-	private IClienteDao clienteDao;
+	private IClienteService service;
 	
 	@GetMapping("/ClientList")
 	public String getAllClients(Model model) {
 		
 		model.addAttribute("title", "Listado de clientes");
-		model.addAttribute("clientList", clienteDao.findAllClients());
+		model.addAttribute("clientList", service.findAllClients());
 		
 		return "ClientList";
 	}
@@ -47,7 +47,7 @@ public class ClienteController {
 	public String updateClient(@PathVariable(value="id") Long id, Map<String, Object> model, Cliente cliente) {
 		
 		if(id>0) {
-			cliente= clienteDao.findOne(id);
+			cliente= service.findOne(id);
 		}else {
 			return "redirect:ClientList";
 		}
@@ -65,9 +65,19 @@ public class ClienteController {
 			return "clientForm";
 		}
 		
-		clienteDao.save(cliente);
+		service.save(cliente);
 		status.isComplete();
 		return "redirect:ClientList";
+	}
+	
+	@GetMapping("/deleteClient/{id}")
+	public String deleteClient(@PathVariable(value="id") Long id){
+		
+		if(id>0) {
+			service.deleteClient(id);
+		}
+		
+		return "redirect:/ClientList";
 	}
 	
 }
