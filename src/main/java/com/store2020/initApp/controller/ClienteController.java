@@ -39,7 +39,7 @@ public class ClienteController {
 	@GetMapping("/clientForm")
 	public String createClient(Map<String, Object> model, Cliente cliente) {
 		model.put("cliente", cliente= new Cliente());
-		model.put("formTitle", "Formulario de clientes");
+		model.put("title", "Formulario de clientes");
 		return "clientForm";
 	}
 	
@@ -53,7 +53,7 @@ public class ClienteController {
 		}
 		
 		model.put("cliente", cliente);
-		model.put("formTitle", "Editar cliente");
+		model.put("title", "Editar cliente");
 		return "clientForm";
 	}
 	
@@ -61,7 +61,7 @@ public class ClienteController {
 	public String saveClient(@Valid Cliente cliente, BindingResult result, Model model, SessionStatus status) {
 		
 		if(result.hasErrors()) {
-			model.addAttribute("formTitle", "Formulario de clientes");
+			model.addAttribute("title", "Formulario de clientes");
 			return "clientForm";
 		}
 		

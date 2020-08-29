@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.store2020.initApp.dao.ClienteDao;
+import com.store2020.initApp.dao.IClienteDao;
 import com.store2020.initApp.model.Cliente;
 
 @Service
@@ -15,7 +15,7 @@ import com.store2020.initApp.model.Cliente;
 public class ClienteServiceImpl implements IClienteService {
 
 	@Autowired
-	private ClienteDao dao;
+	private IClienteDao dao;
 	
 	@Override
 	public List<Cliente> findAllClients() {
